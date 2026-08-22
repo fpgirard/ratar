@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+._*
+
+# KiCad
+*.kicad_pro.lck
+~*.lck
+pcb/RF-HAT/.history/
+
+# Note: OPL_Kicad_Library/ is a git submodule, not ignored.

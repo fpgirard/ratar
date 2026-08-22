@@ -1,0 +1,172 @@
+esphome:
+  name: rf-transceiver-1
+  friendly_name: RF Transceiver 1
+  min_version: 2026.4.0
+  name_add_mac_suffix: false
+  on_boot:
+    priority: 600
+    then:
+      - cc1101.begin_rx
+
+esp32:
+  board: seeed_xiao_esp32c6
+  variant: esp32c6
+  framework:
+    type: esp-idf
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+web_server:
+  port: 80
+
+api:
+  encryption:
+    key: "YIoyZYqHnkfj0BxSo8dLBEvKgbPudm6EzrTPJkPzW3s="
+    
+ota:
+  - platform: esphome
+
+logger:
+  level: DEBUG
+
+spi:
+  clk_pin: GPIO19    # D8 - SCK
+  mosi_pin: GPIO18   # D10 - MOSI
+  miso_pin: GPIO20   # D9 - MISO
+
+cc1101:
+  cs_pin: GPIO21      # D3 - CSN
+  frequency: 304.23MHz
+  modulation_type: ASK/OOK
+
+remote_receiver:
+  id: cc1101_capture
+  pin: GPIO1           # D1 - GDO2
+  dump: raw
+  idle: 15ms
+  filter: 100us
+  tolerance: 25%
+  buffer_size: 10kb
+
+remote_transmitter:
+  id: cc1101_tx
+  pin: GPIO2            # D2 - GDO0
+  carrier_duty_percent: 100%
+  on_transmit:
+    then:
+      - cc1101.begin_tx
+  on_complete:
+    then:
+      - cc1101.begin_rx
+
+# --- Capture / re-arm button (kept for future captures, e.g. resolving reverse) ---
+button:
+  - platform: template
+    name: "Capture 304MHz RF"
+    id: capture_rf_button
+    on_press:
+      - cc1101.begin_rx
+      - logger.log: "CC1101 armed - press the remote button now"
+
+  # --- Remote 1 ---
+  - platform: template
+    name: "Office Fan - Light 1 Toggle"
+    on_press:
+      - remote_transmitter.transmit_raw:
+          code: [312, -697, 313, -684, 324, -695, 329, -668, 334, -666, 335, -666, 336, -687, 315, -687, 316, -687, 341, -336, 660, -697, 318, -349, 666]
+          repeat:
+            times: 6
+            wait_time: 12ms
+
+  - platform: template
+    name: "Office Fan - Low Speed"
+    on_press:
+      - remote_transmitter.transmit_raw:
+          code: [312, -695, 316, -699, 316, -688, 318, -676, 320, -695, 291, -743, 262, -747, 262, -720, 288, -720, 287, -720, 288, -395, 616, -721, 289]
+          repeat:
+            times: 6
+            wait_time: 12ms
+
+  - platform: template
+    name: "Office Fan - Mid Speed"
+    on_press:
+      - remote_transmitter.transmit_raw:
+          code: [327, -704, 312, -698, 317, -676, 319, -696, 319, -692, 318, -693, 260, -771, 235, -773, 235, -747, 286, -396, 614, -721, 286, -722, 287]
+          repeat:
+            times: 6
+            wait_time: 12ms
+
+  - platform: template
+    name: "Office Fan - High Speed"
+    on_press:
+      - remote_transmitter.transmit_raw:
+          code: [317, -706, 319, -673, 319, -695, 318, -694, 318, -668, 343, -666, 343, -665, 342, -665, 342, -341, 647, -690, 342, -665, 316, -690, 317]
+          repeat:
+            times: 6
+            wait_time: 12ms
+
+  - platform: template
+    name: "Office Fan - Stop"
+    on_press:
+      - remote_transmitter.transmit_raw:
+          code: [316, -696, 328, -668, 334, -692, 311, -692, 311, -692, 312, -692, 313, -690, 313, -690, 315, -364, 661, -671, 335, -354, 666, -662, 343]
+          repeat:
+            times: 6
+            wait_time: 12ms
+
+  # --- Remote 2 ---
+  - platform: template
+    name: "Nicks Fan - Light 1 Toggle"
+    on_press:
+      - remote_transmitter.transmit_raw:
+          code: [321, -673, 324, -695, 331, -669, 333, -667, 333, -668, 334, -667, 335, -668, 335, -340, 658, -691, 314, -339, 679, -664, 345, -340, 673]
+          repeat:
+            times: 6
+            wait_time: 12ms
+            
+  - platform: template
+    name: "Nicks Fan - Low Speed"
+    on_press:
+      - remote_transmitter.transmit_raw:
+          code: [321, -687, 312, -691, 322, -690, 324, -687, 303, -680, 331, -677, 344, -656, 345, -344, 643, -698, 320, -672, 319, -342, 684, -676, 310]
+          repeat:
+            times: 6
+            wait_time: 12ms
+
+  - platform: template
+    name: "Nicks Fan - Mid Speed"
+    on_press:
+      - remote_transmitter.transmit_raw:
+          code: [332, -674, 320, -688, 312, -688, 336, -668, 321, -689, 323, -687, 302, -682, 331, -352, 665, -691, 303, -353, 668, -689, 303, -678, 335]
+          repeat:
+            times: 6
+            wait_time: 12ms
+
+  - platform: template
+    name: "Nicks Fan - High Speed"
+    on_press:
+      - remote_transmitter.transmit_raw:
+          code: [336, -679, 315, -690, 311, -697, 317, -668, 336, -668, 335, -665, 335, -671, 320, -363, 648, -367, 646, -690, 311, -692, 323, -688, 303]
+          repeat:
+            times: 6
+            wait_time: 12ms
+
+  - platform: template
+    name: "Nicks Fan - Off"
+    on_press:
+      - remote_transmitter.transmit_raw:
+          code: [334, -687, 313, -676, 338, -676, 313, -698, 316, -672, 342, -670, 321, -691, 325, -334, 666, -342, 669, -668, 329, -354, 665, -665, 329]
+          repeat:
+            times: 6
+            wait_time: 12ms
+
+  - platform: template
+    name: "Nicks Fan - Reverse"
+    on_press:
+      - remote_transmitter.transmit_raw:
+          code: [330, -674, 322, -692, 326, -658, 331, -679, 333, -675, 345, -655, 347, -669, 321, -341, 671, -667, 346, -669, 321, -666, 346, -340, 648]
+          repeat:
+            times: 6
+            wait_time: 12ms
