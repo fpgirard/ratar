@@ -7,10 +7,10 @@
 <br clear="left"/>
 
 Just as [Paul Wieland built his Ratgdo](https://www.nytimes.com/2025/12/04/technology/personaltech/why-on),
-my goal was simple: an open-source, sub-$10 device to control my Minka-Aire
+my goal was equally simple: an open-source, sub-$10 device to control my Minka-Aire
 fans (FCC ID **KUJCE10007**), built from the same kind of open-source
 software and commodity parts he used — ESPHome, 3D printing, inexpensive
-ESP32-C6 boards, and CC1101-based RF modules.
+ESP32 boards with an added CC1101-based RF module.
 
 I also planned to capture my Minka-Aire remotes' RF codes directly, or fall
 back to a [Flipper repository of RF codes](https://github.com/search?q=repo%3AZero-Sploit%2FFlipperZero-Subghz-DB+minka&type=code)
