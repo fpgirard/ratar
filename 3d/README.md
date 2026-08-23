@@ -1,12 +1,12 @@
-<img src="yoda.png" align="left" width="720" alt="RATAR logo" />
+<img src="yoda.png" width="720" alt="3D-printed Grogu figurine, unrelated to Ratar -- just for fun" />
 
 # Enclosure
 
-*Ratar enclosure using parametric OpenSCAD (BOSL2)*
+*Ratar's printed enclosure — parametric OpenSCAD (BOSL2)*
 
 A 50mm-diameter cylindrical two-part enclosure (base + lid) for the RF-HAT
 board, sized to hold both the XIAO ESP32-C6 + CC1101 stack and a second,
-wider board tier above it.  Yoda is optional.
+wider board tier above it. Yoda is optional.
 
 ## Design highlights
 
@@ -39,5 +39,5 @@ side / lid facing up) — no supports needed.
 To regenerate the STL after editing the source:
 
 ```sh
-     openscad -o ratar.stl ratar.scad
+openscad -o ratar.stl ratar.scad
 ```

@@ -1,6 +1,8 @@
+<img src="../ratar-color.svg" align="left" width="120" alt="Ratar logo" />
+
 # Software
 
-*ESPHome firmware — RF capture and replay on the CC1101*
+*ESPHome firmware for Ratar — RF capture and replay on the CC1101*
 
 ## ESPHome + the built-in `cc1101` component
 
@@ -95,10 +97,9 @@ button:
             wait_time: 12ms
 ```
 
-Full button set for both captured Minka Aire remotes (11 functions total —
-light toggle x2, low/mid/high speed, stop/off, and reverse on the second
-remote) lives in the project's reference doc / Signal Bench catalog rather
-than duplicated here.
+The full button set for both captured Minka Aire remotes (11 functions
+total — light toggle ×2, low/mid/high speed, stop/off, and reverse on the
+second remote) lives in Signal Bench rather than being duplicated here.
 
 ## Why 304MHz, not 315MHz
 

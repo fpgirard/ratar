@@ -1,21 +1,33 @@
-<img src="ratar-color.svg" align="left" width="240" alt="RATAR logo" />
+<img src="ratar-color.svg" align="left" width="120" alt="Ratar logo" />
 
-# Rage Against the Alkaline Remotes (Ratar)
-*An RF Signal Capture & Replay Devices that uses the XIAO ESP32-C6 and CC1101*
+# Ratar
+
+*Rage Against the Alkaline Remote — RF signal capture & replay with an XIAO ESP32-C6 and CC1101*
+
 <br clear="left"/>
 
-Just as [Paul Wieland built his Ratgdo](https://www.nytimes.com/2025/12/04/technology/personaltech/why-on), my objective was equally simple: I needed to build an open-source, sub-$10 device to control my Minka-Aire fans (FCC ID **KUJCE10007**), Like Paul, I intended to leverage open source software and 
-commodity components: ESPHome, 3D printing, inexpensive ESP32C6 microprocessors and CC1101-based RF PCBs. 
+Just as [Paul Wieland built his Ratgdo](https://www.nytimes.com/2025/12/04/technology/personaltech/why-on),
+my goal was simple: an open-source, sub-$10 device to control my Minka-Aire
+fans (FCC ID **KUJCE10007**), built from the same kind of open-source
+software and commodity parts he used — ESPHome, 3D printing, inexpensive
+ESP32-C6 boards, and CC1101-based RF modules.
 
-I also planned to either capture my Minka-Aire RF values from my remotes or use a [Flipper repository of RF codes](https://github.com/search?q=repo%3AZero-Sploit%2FFlipperZero-Subghz-DB+minka&type=code).
+I also planned to capture my Minka-Aire remotes' RF codes directly, or fall
+back to a [Flipper repository of RF codes](https://github.com/search?q=repo%3AZero-Sploit%2FFlipperZero-Subghz-DB+minka&type=code)
+if needed.
 
-While Ratar is initially narrow in scope, I carefully designed it so that it might support a much larger idea: a foundation that might offer our  community a universal, community-supported RF/IR transceiver, where the hardware (PCBs), software (yaml) and CAD (OpenSCAD) files are shared and easily extensable to any 300–928MHz remote.  (I'm currently adding an IR LED/receiver to the Ratar HAT).
+While Ratar is narrow in scope today, I designed it to support a much
+larger idea: a universal, community-supported RF/IR transceiver, where the
+hardware (PCBs), software (YAML), and CAD (OpenSCAD) files are shared and
+easily extensible to any 300–928MHz remote. (I'm currently adding an IR
+LED/receiver to the Ratar HAT.)
 
 ---
 
 ## Repo layout
 
-It's clean, simple and should be easy to navigate.  Questions?  Comments?  Please uses Issues above to post.  
+It's clean and simple, and should be easy to navigate. Questions or
+comments? Please use Issues above to post.
 
 | Path | Contents |
 |---|---|
@@ -33,4 +45,5 @@ See each area's own README for topic-specific roadmap items (IR support and
 protocol decoding in [`src/`](src/README.md), the KiCad schematic net-label
 cleanup in [`pcb/`](pcb/README.md)).
 
-By design, the House-shaped Ratar Logo is based on the Kicad copper traces of the PCB Hat. :)
+By design, the house-shaped Ratar logo is drawn from the KiCad copper
+traces on the PCB HAT. :)
