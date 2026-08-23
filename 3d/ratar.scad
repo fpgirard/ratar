@@ -72,7 +72,7 @@ round_standoff_height    = pcb_support_height + 2; // 2mm taller than the corner
 side_hole_dia              = 7.2;  // Through-hole diameter, cavity to counterbore
 side_hole_bottom_clearance = 0.5;  // Gap between the hole's bottom edge and the
                                    // interior floor
-hole_wall_thickness        = 3;    // Thickness of the flat shoulder left at the
+hole_wall_thickness        = 4;    // Thickness of the flat shoulder left at the
                                    // counterbore's bottom, for the cable hole
 counterbore_dia            = 10;   // Diameter of the shallow flat-bottomed pocket
                                    // cut into the curved outer surface

@@ -11,35 +11,30 @@
 
 ## Pin assignments — CC1101 ↔ XIAO ESP32-C6 (final)
 
-| CC1101 Pin # | Signal | XIAO Pin | GPIO | Notes |
-|---|---|---|---|---|
-| 1 | GND | GND | — | |
-| 2 | VCC | 3V3 | — | 1.8–3.6V only — never 5V |
-| 3 | GDO0 | D2 | GPIO2 | Wired to `remote_transmitter` (TX path) |
-| 4 | CSN | D3 | GPIO21 | SPI chip select |
-| 5 | SCK | D8 | GPIO19 | SPI clock |
-| 6 | MOSI | D10 | GPIO18 | SPI data in |
-| 7 | MISO / GDO1 | D9 | GPIO20 | SPI data out (dual-purpose pin) |
-| 8 | GDO2 | D1 | GPIO1 | Wired to `remote_receiver` (RX/capture path) |
+| CC1101 Pin # | Signal      | XIAO Pin | GPIO   | Notes |
+|--------------|-------------|----------|--------|-------|
+| 1            | GND         | GND      | -      | |
+| 2            | VCC         | 3V3      | -      | 1.8-3.6V only - never 5V |
+| 3            | GDO0        | D2       | GPIO2  | Wired to `remote_transmitter` (TX path) |
+| 4            | CSN         | D3       | GPIO21 | SPI chip select |
+| 5            | SCK         | D8       | GPIO19 | SPI clock |
+| 6            | MOSI        | D10      | GPIO18 | SPI data in |
+| 7            | MISO / GDO1 | D9       | GPIO20 | SPI data out (dual-purpose pin) |
+| 8            | GDO2        | D1       | GPIO1  | Wired to `remote_receiver` (RX/capture path) |
 
-All connections use clean, non-strapping GPIOs on the C6 — no boot-reliability
-issues. GDO0 was deliberately moved from its original D0 assignment to D2
-during PCB layout; if you're comparing against an older revision of this
-project, that's the difference to watch for.
+All connections use clean, non-strapping GPIOs on the C6. 
 
-**A note on the KiCad schematic**: when the RF-HAT board was designed, the
-CC1101 header (`J1`) was wired as a generic 8-pin connector with no net
-labels. If you're referencing or modifying the KiCad source, verify the
-physical pin-to-signal mapping against the table above (and against how the
-CC1101 module actually plugs into the header) before trusting the schematic
-alone — run KiCad's ERC and pull the netlist to catch any wiring mismatches
-(a GND/VCC short was caught this way during this build) rather than relying
-on manual trace-reading.
+**A note on the KiCad schematic**: when the RF-HAT board was designed, the CC1101 header (`J1`) was wired as a generic 8-pin connector with no net labels. If you're referencing or modifying the KiCad source, verify the physical pin-to-signal mapping against the table above (and against how the CC1101 module actually plugs into the header) before trusting the schematic alone — run KiCad's ERC and pull the netlist to catch any wiring mismatches (a GND/VCC short was caught this way during this build) rather than relying on manual trace-reading. 
+
+## Manufacturing
+If you're thinking of using PCBWay, the file RF-HAT.kicad_pcb.zip can be uploaded directly.  Making 5 PCBs is the same cost ($5) as making 10 ($5) since you will be sub-100mm x 100mm.
+
 
 ## Directory contents
 
-- `RF-HAT/` — the KiCad project: schematic, PCB layout, fab-ready gerbers and
-  drill files, and a manufacturing report.
+- `RF-HAT/` — the KiCad project: schematic, PCB layout, and fab-ready
+  gerbers/drill files (`RF-HAT.kicad_pcb.zip` is ready to upload directly
+  to a fab like PCBWay).
 - `OPL_Kicad_Library/` (at the repo root, git submodule) — Seeed's KiCad
   footprint/symbol library, used for the XIAO and other Seeed parts on this
   board.

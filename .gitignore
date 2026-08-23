@@ -8,3 +8,7 @@
 pcb/RF-HAT/.history/
 
 # Note: OPL_Kicad_Library/ is a git submodule, not ignored.
+
+# Security
+src/rf-transceiver.yaml
+notes

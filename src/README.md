@@ -131,8 +131,10 @@ mean the difference between a clean capture and nothing at all.
 
 ## Directory contents
 
-- `rf-transceiver.yaml` — the ESPHome config above (CC1101 RF capture/replay).
-- `irblaster.yaml` — companion IR blaster ESPHome config.
+- `rf-transceiver-sample.yaml` — the ESPHome config above (CC1101 RF
+  capture/replay), with placeholder secrets. Your own `rf-transceiver.yaml`
+  (real device name, API key, captured codes) is gitignored — copy the
+  sample to that filename and fill in your own values.
 - `fix_xiao_footprints.py` — utility script for XIAO KiCad footprint fixes.
 
 ## Related: Signal Bench

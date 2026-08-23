@@ -1,17 +1,19 @@
+<img src="yoda.png" align="left" width="720" alt="RATAR logo" />
+
 # Enclosure
 
-*Round PCB enclosure for the RF-HAT build — parametric OpenSCAD (BOSL2)*
+*Ratar enclosure using parametric OpenSCAD (BOSL2)*
 
 A 50mm-diameter cylindrical two-part enclosure (base + lid) for the RF-HAT
 board, sized to hold both the XIAO ESP32-C6 + CC1101 stack and a second,
-wider board tier above it.
+wider board tier above it.  Yoda is optional.
 
 ## Design highlights
 
 - **Two-tier cavity**: a board cavity sized to the PCB, with a wider cutout
   starting partway up that continues through the top of the base — room for
   a second, larger board or extra component clearance above the main stack.
-- **Stepped cable and USB-C cutouts**: both the round cable hole and the
+- **Antenna and USB-C cutouts**: both the round cable hole and the
   USB-C slot on the outer wall are cut as a small through-bore plus a wider,
   shallow counterbore pocket with a controlled flat shoulder between them —
   the trick that lets a flat connector face sit cleanly on an otherwise
@@ -29,13 +31,13 @@ side / lid facing up) — no supports needed.
 
 ## Files
 
-- `pcb_enclosure_round.scad` — the parametric source. Requires the
+- `ratar.scad` — the parametric source. Requires the
   [BOSL2](https://github.com/BelfrySCAD/BOSL2) OpenSCAD library
   (`include <BOSL2/std.scad>`, `include <BOSL2/screws.scad>`).
-- `pcb_enclosure_round.stl` — exported mesh, ready to slice.
+- `ratar.stl` — exported mesh, ready to slice.
 
 To regenerate the STL after editing the source:
 
 ```sh
-openscad -o pcb_enclosure_round.stl pcb_enclosure_round.scad
+     openscad -o ratar.stl ratar.scad
 ```

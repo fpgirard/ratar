@@ -1,47 +1,21 @@
-# Rage Against the Alkaline Remotes
+<img src="ratar-color.svg" align="left" width="240" alt="RATAR logo" />
 
-*RF Signal Capture & Replay — CC1101 + XIAO ESP32-C6*
+# Rage Against the Alkaline Remotes (Ratar)
+*An RF Signal Capture & Replay Devices that uses the XIAO ESP32-C6 and CC1101*
+<br clear="left"/>
 
-A from-scratch build that turns a $2 CC1101 sub-GHz transceiver and a Seeed
-XIAO ESP32-C6 into a fully working RF capture-and-replay device, controlled
-through Home Assistant via ESPHome. Built to reverse-engineer two Minka Aire
-ceiling fan remotes (FCC ID **KUJCE10007**) that had no public protocol
-documentation anywhere — this project produced what appears to be the first
-public decode of that remote.
+Just as [Paul Wieland built his Ratgdo](https://www.nytimes.com/2025/12/04/technology/personaltech/why-on), my objective was equally simple: I needed to build an open-source, sub-$10 device to control my Minka-Aire fans (FCC ID **KUJCE10007**), Like Paul, I intended to leverage open source software and 
+commodity components: ESPHome, 3D printing, inexpensive ESP32C6 microprocessors and CC1101-based RF PCBs. 
 
-It also produced **Signal Bench**, a small self-hosted web app for cataloging
-RF and IR codes as a community resource, seeded with the real codes captured
-here — see [`src/README.md`](src/README.md#related-signal-bench) for details.
+I also planned to either capture my Minka-Aire RF values from my remotes or use a [Flipper repository of RF codes](https://github.com/search?q=repo%3AZero-Sploit%2FFlipperZero-Subghz-DB+minka&type=code).
 
-This repo is deliberately scoped narrow — one board, one protocol family,
-two remotes — but it's built as the first working instance of a much
-broader idea: a universal, community-supported RF/IR transceiver, where the
-hardware and ESPHome software pattern generalize to any 300–928MHz remote
-(and, with an IR LED/receiver added, to IR devices too), and Signal Bench is
-what turns each person's one-off reverse-engineering work into a shared,
-growing catalog instead of something redone from scratch every time.
-
----
-
-## Why this project matters
-
-Most consumer RF remotes — ceiling fans, garage doors, gate openers — use
-cheap, undocumented sub-GHz chips with no published protocol, no open
-database, and no vendor incentive to ever publish one. Commercial universal
-receivers (like Bond Bridge) solve this by doing the reverse-engineering
-work privately and never releasing the results. If your device isn't in
-their tested list, you're stuck.
-
-This project shows that reverse-engineering a real, undocumented remote is
-achievable with under $10 of hardware and an evening of careful capture
-work — and that the result is worth publishing rather than keeping private.
-**Signal Bench** exists to make that publishing step easy, so the next
-person with the same fan (or the same FCC ID) doesn't have to redo this
-work from scratch.
+While Ratar is initially narrow in scope, I carefully designed it so that it might support a much larger idea: a foundation that might offer our  community a universal, community-supported RF/IR transceiver, where the hardware (PCBs), software (yaml) and CAD (OpenSCAD) files are shared and easily extensable to any 300–928MHz remote.  (I'm currently adding an IR LED/receiver to the Ratar HAT).
 
 ---
 
 ## Repo layout
+
+It's clean, simple and should be easy to navigate.  Questions?  Comments?  Please uses Issues above to post.  
 
 | Path | Contents |
 |---|---|
@@ -58,3 +32,5 @@ work from scratch.
 See each area's own README for topic-specific roadmap items (IR support and
 protocol decoding in [`src/`](src/README.md), the KiCad schematic net-label
 cleanup in [`pcb/`](pcb/README.md)).
+
+By design, the House-shaped Ratar Logo is based on the Kicad copper traces of the PCB Hat. :)
