@@ -4,6 +4,12 @@
 
 *ESPHome firmware for Ratar — RF capture and replay on the CC1101*
 
+There are 2 software components in Ratar: 1. The ESPHome yaml configuration
+file necessary to control your RF-based devices.  2. Signal Bench - a prototype
+database to help the community collect and share their raw codes.  This resource
+will be made available if the community requests it - while realizing that 
+existing RF and IR code repositories already exist.   
+
 ## ESPHome + the built-in `cc1101` component
 
 The build uses ESPHome's **official `cc1101` component**, added in
@@ -18,88 +24,7 @@ and replay.
 
 ## Complete working configuration
 
-```yaml
-esphome:
-  name: xiao-c6-cc1101
-  friendly_name: XIAO C6 CC1101
-  on_boot:
-    priority: 600
-    then:
-      - cc1101.begin_rx
-
-esp32:
-  board: seeed_xiao_esp32c6
-  variant: esp32c6
-  framework:
-    type: esp-idf
-
-wifi:
-  ssid: !secret wifi_ssid
-  password: !secret wifi_password
-
-api:
-  encryption:
-    key: !secret api_encryption_key
-
-ota:
-  - platform: esphome
-    password: !secret ota_password
-
-logger:
-  level: DEBUG
-
-spi:
-  clk_pin: GPIO19    # D8 - SCK
-  mosi_pin: GPIO18   # D10 - MOSI
-  miso_pin: GPIO20   # D9 - MISO
-
-cc1101:
-  cs_pin: GPIO21      # D3 - CSN
-  frequency: 304MHz
-  modulation_type: ASK/OOK
-
-remote_receiver:
-  id: cc1101_capture
-  pin: GPIO1           # D1 - GDO2
-  dump: raw
-  idle: 15ms
-  filter: 100us
-  tolerance: 25%
-  buffer_size: 10kb
-
-remote_transmitter:
-  id: cc1101_tx
-  pin: GPIO2            # D2 - GDO0
-  carrier_duty_percent: 100%
-  on_transmit:
-    then:
-      - cc1101.begin_tx
-  on_complete:
-    then:
-      - cc1101.begin_rx
-
-button:
-  - platform: template
-    name: "Capture 304MHz RF"
-    id: capture_rf_button
-    on_press:
-      - cc1101.begin_rx
-      - logger.log: "CC1101 armed - press the remote button now"
-
-  # One button per captured remote function - example:
-  - platform: template
-    name: "Fan 1 - Light Toggle"
-    on_press:
-      - remote_transmitter.transmit_raw:
-          code: [312, -697, 313, -684, 324, -695, 329, -668, 334, -666, 335, -666, 336, -687, 315, -687, 316, -687, 341, -336, 660, -697, 318, -349, 666]
-          repeat:
-            times: 6
-            wait_time: 12ms
-```
-
-The full button set for both captured Minka Aire remotes (11 functions
-total — light toggle ×2, low/mid/high speed, stop/off, and reverse on the
-second remote) lives in Signal Bench rather than being duplicated here.
+Please review the file `rf-transceiver-sample.yaml` for a working configuration.
 
 ## Why 304MHz, not 315MHz
 
@@ -132,8 +57,8 @@ mean the difference between a clean capture and nothing at all.
 
 ## Directory contents
 
-- `rf-transceiver-sample.yaml` — the ESPHome config above (CC1101 RF
-  capture/replay), with placeholder secrets. Your own `rf-transceiver.yaml`
+- `rf-transceiver-sample.yaml` — the ESPHome CC1101 RF capture/replay
+  config, with placeholder secrets and API key. Your own `rf-transceiver.yaml`
   (real device name, API key, captured codes) is gitignored — copy the
   sample to that filename and fill in your own values.
 - `fix_xiao_footprints.py` — utility script for XIAO KiCad footprint fixes.

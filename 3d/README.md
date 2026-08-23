@@ -2,7 +2,7 @@
 
 # Enclosure
 
-*Ratar's printed enclosure — parametric OpenSCAD (BOSL2)*
+*Ratar's printed enclosure: a parametric OpenSCAD (BOSL2) design*
 
 A 50mm-diameter cylindrical two-part enclosure (base + lid) for the RF-HAT
 board, sized to hold both the XIAO ESP32-C6 + CC1101 stack and a second,
@@ -27,14 +27,14 @@ wider board tier above it. Yoda is optional.
 ## Print notes
 
 Base and lid both print flat on the bed as oriented in the file (open
-side / lid facing up) — no supports needed.
+side / lid facing up); no supports needed.
 
 ## Files
 
 - `ratar.scad` — the parametric source. Requires the
   [BOSL2](https://github.com/BelfrySCAD/BOSL2) OpenSCAD library
   (`include <BOSL2/std.scad>`, `include <BOSL2/screws.scad>`).
-- `ratar.stl` — exported mesh, ready to slice.
+- `ratar.stl`.  Exported mesh, ready to slice.
 
 To regenerate the STL after editing the source:
 

@@ -37,6 +37,14 @@ comments? Please use Issues above to post.
 | `OPL_Kicad_Library/` | Git submodule — Seeed's KiCad footprint/symbol library, used by the RF-HAT PCB |
 | `ratar.svg`, `ratar-color.svg` | Project logo |
 
+`OPL_Kicad_Library/` is a git submodule, so clone with:
+
+```sh
+git clone --recurse-submodules https://github.com/fpgirard/ratar.git
+```
+
+(Already cloned without it? Run `git submodule update --init` to pull it in.)
+
 ---
 
 ## Future enhancements
