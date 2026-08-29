@@ -59,7 +59,8 @@ standoff_inset  = 2;      // Gap between each end wall's inner face and the near
 // --- Upper standoffs (4, for the upper cutout's board) -- same X offsets
 // and X/Y footprint as the standoffs above, just taller and set against the
 // upper cutout's (wider) side walls instead ---
-upper_standoff_height = 5.25; // Height above upper_cavity_z where these rest
+upper_standoff_height = 6.75; // Height above upper_cavity_z where these rest --
+                              // raised 1.5mm for taller PCB headers
 
 // --- Round center standoffs (2, likely for screw-mounting the PCB) ---
 round_standoff_dia      = 3.25; // Outer diameter of each round standoff
@@ -72,7 +73,7 @@ round_standoff_height    = pcb_support_height + 2; // 2mm taller than the corner
 side_hole_dia              = 7.2;  // Through-hole diameter, cavity to counterbore
 side_hole_bottom_clearance = 0.5;  // Gap between the hole's bottom edge and the
                                    // interior floor
-hole_wall_thickness        = 4;    // Thickness of the flat shoulder left at the
+hole_wall_thickness        = 3.25; // Thickness of the flat shoulder left at the
                                    // counterbore's bottom, for the cable hole
 counterbore_dia            = 10;   // Diameter of the shallow flat-bottomed pocket
                                    // cut into the curved outer surface
@@ -87,10 +88,10 @@ upper_cavity_offset_x   = 1; // Shifted 1mm in +X from the shell's center --
                                  // the lid lip follows this too
 
 // --- USB-C cutout (+X wall, same side as the circular hole) ---
-usb_c_width    = 9;   // Slot width, along Y -- reaches the cavity for the PCB connector
-usb_c_height   = 3.2; // Slot height, along Z
+usb_c_width    = 11;  // Slot width, along Y -- reaches the cavity for the PCB connector
+usb_c_height   = 4.2; // Slot height, along Z
 usb_c_corner_r = 1.5; // Corner rounding -- close to usb_c_height/2 for a stadium slot
-usb_c_offset_z = 8;   // How far above the circular hole's center the slot is centered
+usb_c_offset_z = 10.25; // How far above the circular hole's center the slot is centered
 usb_wall_thickness = 0.5; // Thickness of the flat shoulder left between the cavity
                            // and the housing pocket's bottom, for the USB-C slot --
                            // same stepped-bore idea as hole_wall_thickness above
@@ -98,12 +99,12 @@ usb_wall_thickness = 0.5; // Thickness of the flat shoulder left between the cav
 // USB-C cable housing pocket: a shallow flat-bottomed recess in the curved
 // outer surface, concentric with the slot above, sized to clear a cable
 // plug housing -- doesn't reach the cavity, just the housing's flare
-usb_pocket_width    = 10;  // Pocket width, along Y (cable housing width)
-usb_pocket_height   = 7;   // Pocket height, along Z (cable housing height)
+usb_pocket_width    = 12;  // Pocket width, along Y (cable housing width)
+usb_pocket_height   = 8;   // Pocket height, along Z (cable housing height)
 usb_pocket_corner_r = 2;   // Rounded corners, not a full stadium
 
 // --- Lid retention lip ---
-lip_engage_depth   = 1;   // How far the lid's lip drops down inside the box mouth
+lip_engage_depth   = 1.25;   // How far the lid's lip drops down inside the box mouth
 lip_side_clearance = 0.3; // Per-side clearance so the lip presses in without binding
 
 // --- Lid fasteners: M2 socket-head (Allen) bolts into heat-set inserts in
@@ -117,7 +118,7 @@ lip_side_clearance = 0.3; // Per-side clearance so the lip presses in without bi
 // paper-thin underneath it ---
 lid_bolt_spacing_y = 30;  // Center-to-center spacing between the two bolts (Y)
 lid_bolt_length    = 8;   // M2x8
-m2_counterbore_depth = 0.7; // Spot-face depth -- head sits proud above this,
+m2_counterbore_depth = 1; // Spot-face depth -- head sits proud above this,
                              // well short of the socket head's ~2mm height
 
 m2_insert_dia   = 3.5; // Heat-set insert outer diameter (M2 brass/copper insert)
@@ -309,8 +310,12 @@ gap = 6;
 
 pcb_box_base();
 
+// Lid is modeled lip-down; flip it here so the exported/sliced part is
+// already lip-up (flat outer face down on the bed) -- no slicer flip needed
 back(outer_dia + gap)
-    pcb_box_lid();
+    up(lid_thickness)
+        rotate([180, 0, 0])
+            pcb_box_lid();
 
 // --- Diagnostics (visible in OpenSCAD console) ---
 echo("Outer diameter / height ..", outer_dia, "mm /", box_height, "mm");
